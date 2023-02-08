@@ -2,10 +2,29 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import pino from 'pino'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const logger = pino();
+
 export default function Home() {
+  async function greeting(){
+    logger.debug("Start of greeting");
+    
+    logger.fatal('fatal');
+    logger.error('error');
+    logger.warn('warn');
+    logger.info('info');
+    logger.debug('debug');
+    logger.trace('trace');
+
+    console.log("Hello");
+    console.log("Goodbye");
+
+    logger.debug("End of greeting");
+  }
+
   return (
     <>
       <Head>
@@ -47,6 +66,7 @@ export default function Home() {
             width={180}
             height={37}
             priority
+            onClick={greeting}
           />
           <div className={styles.thirteen}>
             <Image
